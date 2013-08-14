@@ -1,12 +1,11 @@
 #!/bin/bash
 if [ $# -lt 1 ]
 then
-	echo Usage: $0 progname [args]
+	echo Usage: $0 CMD [ARGS]
 else
-	set -m
 	executable=$1
 	shift
 	$executable $@ &
-	xdotool search --sync --pid $! 2> /dev/null | xargs -I {} xdotool windowsize {} 100% 100%
-	fg > /dev/null
+	xdotool search --sync --onlyvisible --pid $! 2> /dev/null | xargs -I {} xdotool windowsize {} 100% 100%
+	wait
 fi
