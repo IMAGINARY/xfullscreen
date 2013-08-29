@@ -6,7 +6,7 @@ else
 	set -m
 	executable=$1
 	shift
-	$executable $@ &
+	$executable "$@" &
 	xdotool search --sync --pid $! 2> /dev/null | xargs -I {} xdotool windowsize {} 100% 100%
 	fg > /dev/null
 fi
