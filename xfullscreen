@@ -5,7 +5,6 @@ then
 else
 	executable=$1
 	shift
-	$executable "$@" &
-	xdotool search --sync --onlyvisible --pid $! 2> /dev/null | xargs -I {} xdotool windowsize {} 100% 100%
-	wait
+	( xdotool search --sync --onlyvisible --pid $$ 2> /dev/null | xargs -I {} xdotool windowsize {} 100% 100% ) &
+	exec $executable "$@"
 fi
