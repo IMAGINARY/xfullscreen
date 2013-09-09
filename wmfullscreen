@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ $# -lt 1 ]
+then
+	echo Usage: $0 CMD [ARGS]
+else
+	executable=$1
+	shift
+#	( xdotool search --sync --onlyvisible --pid $$ 2> /dev/null | xargs -I {} echo {} ) &
+        ( xdotool search --sync --onlyvisible --pid $$ 2> /dev/null | xargs -I {} wmctrl -i -r {} -b add,fullscreen ) &
+
+	exec $executable "$@"
+fi
